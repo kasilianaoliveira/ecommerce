@@ -1,0 +1,39 @@
+.header-container {
+  width: 100%;
+
+  background-color: #212529;
+  color: #f8f9fa;
+
+  padding: 10px;
+
+}
+
+.header-items-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+.header-item {
+  font-weight: 600;
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+
+  cursor: pointer;
+}
+
+.item {
+  display: flex;
+  gap: 3px;
+}
