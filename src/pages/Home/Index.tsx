@@ -1,4 +1,5 @@
 import { Banner } from "../../components/Banner"
+import { Categories } from "../../components/Categories"
 import { Header } from "../../components/Header"
 
 export const Home = () => {
@@ -6,6 +7,7 @@ export const Home = () => {
     <>
       <Header />
       <Banner />
+      <Categories />
     </>
   )
 }

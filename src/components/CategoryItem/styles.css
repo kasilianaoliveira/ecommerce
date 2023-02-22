@@ -1,0 +1,32 @@
+.categories-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.content-title a {
+  color: inherit;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-items {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  /* width: 450px; */
+}

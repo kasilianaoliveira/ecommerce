@@ -1,0 +1,13 @@
+.categories-container {
+  margin-bottom: 4.375rem;
+
+
+}
+
+.content-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

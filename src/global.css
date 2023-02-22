@@ -1,6 +1,7 @@
 :root {
   --white: #ffffff;
   --black: #000000;
+  --black-300: #171520;
   --black-500: #222121;
   --black-100: #363434;
 
@@ -26,6 +27,10 @@ body {
   height: 100%;
 }
 
+/* body {
+  color: var(--black-300);
+} */
+
 body::-webkit-scrollbar {
   width: 1rem;
 }
@@ -34,9 +39,8 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 0.5rem;
-  border: 0.25rem solid white;
-  color: '#fff';
-
+  border: 0.25rem solid var(--white);
+  color: var(--white);
 }
 
 a {
