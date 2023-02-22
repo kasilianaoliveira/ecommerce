@@ -1,13 +1,15 @@
-import { Banner } from "./components/Banner";
-import { Header } from "./components/Header";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home/Index";
 
 
 function App() {
   return (
-    <>
-      <Header />
-      <Banner />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
