@@ -1,8 +1,8 @@
 .header-container {
   width: 100%;
 
-  background-color: #212529;
-  color: #f8f9fa;
+  background-color: var(--black-500);
+  color: var(--white);
 
   padding: 10px;
 
@@ -13,6 +13,7 @@
   margin: 0 auto;
 
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -23,7 +24,7 @@
 
 
 .header-item {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
 
   display: flex;
@@ -31,6 +32,12 @@
   gap: 2.5rem;
 
   cursor: pointer;
+}
+
+.items-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .item {
