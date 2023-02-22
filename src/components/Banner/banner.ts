@@ -60,7 +60,7 @@ export const ButtonCard = styled.button`
   transition:  all .5s;
 
   &:hover {
-    opacity: 0.92;
+    background-color: var(--black);
   }
 `;
 
