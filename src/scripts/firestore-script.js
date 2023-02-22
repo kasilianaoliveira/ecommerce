@@ -3,12 +3,12 @@ const { getFirestore } = require('firebase/firestore')
 const { initializeApp } = require('firebase/app')
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAwQ1k-2H5qI4vvrHbXh6CEC3oWbZV02SA",
-  authDomain: "club-ecommerce-2e809.firebaseapp.com",
-  projectId: "club-ecommerce-2e809",
-  storageBucket: "club-ecommerce-2e809.appspot.com",
-  messagingSenderId: "709369726879",
-  appId: "1:709369726879:web:ec469697d52df17bf9dfaa"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 const app = initializeApp(firebaseConfig)
