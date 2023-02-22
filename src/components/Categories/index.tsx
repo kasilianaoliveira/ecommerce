@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Category } from '../../types/category';
-
-import { CategoryItem } from '../CategoryItem/index';
 import { getDocs, collection } from "firebase/firestore";
 import { db } from '../config/firestore.config';
-import "./styles.css"
-import { env } from '../config/env.config';
-import axios from 'axios';
+
+import { Category } from '../../types/category';
+import { CategoryItem } from '../CategoryItem/index';
+import { CategoriesContainer, CategoriesContent } from './categories';
 
 export const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([])
@@ -33,13 +31,13 @@ export const Categories = () => {
 
 
   return (
-    <div className='categories-container'>
-      <div className='content-categories'>
+    <CategoriesContainer>
+      <CategoriesContent>
         {categories.map((category, index) => (
           <CategoryItem category={category} key={category.id} index={index} />
         ))}
-      </div>
+      </CategoriesContent>
 
-    </div>
+    </CategoriesContainer>
   )
 }

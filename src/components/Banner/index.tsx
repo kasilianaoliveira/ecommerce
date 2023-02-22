@@ -2,22 +2,26 @@
 import BannerImg from "../../assets/Banner.jpg";
 import { BsArrowRight } from "react-icons/bs";
 
-import "./styles.css"
+import { BannerContainer, BannerTitle, ButtonCard, ContentCard, DescriptionTitle, ImageBanner } from "./banner";
 
 export const Banner = () => {
 
 
   return (
-    <div className="container-image">
-      <div className="content-card">
-        <h3>Escolha o seu novo tênis</h3>
-        <p>Coleção nova de tênis esportivo</p>
-        <button className="card-button">
+    <BannerContainer>
+      <ContentCard>
+        <BannerTitle>
+          Escolha o seu novo tênis
+        </BannerTitle>
+        <DescriptionTitle>
+          Coleção nova de tênis esportivo
+        </DescriptionTitle>
+        <ButtonCard>
           <BsArrowRight />
           Veja mais
-        </button>
-      </div>
-      <img src={BannerImg} alt="Imagem de uma pessoa correndo" className="image-banner" />
-    </div>
+        </ButtonCard>
+      </ContentCard>
+      <ImageBanner src={BannerImg} alt="Imagem de uma pessoa correndo" />
+    </BannerContainer>
   )
 }

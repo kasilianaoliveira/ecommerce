@@ -1,14 +1,18 @@
-.container-image {
+import styled from 'styled-components';
+
+export const BannerContainer = styled.div`
   max-width: 1200px;
   margin: 50px auto;
   position: relative;
-}
+`;
 
-.content-card {
+export const ContentCard = styled.div`
   z-index: 1;
+
   position: absolute;
   right: 0px;
-  top: 18%;
+  top: 20%;
+
   width: 37.5rem;
   height: 19.75rem;
 
@@ -25,22 +29,23 @@
   color: var(--black-500);
 
   padding: 48px;
-}
+`;
 
-.content-card h3 {
+export const BannerTitle = styled.h3`
   font-weight: 700;
   font-size: 2.5rem;
-}
-
-.content-card p {
+`;
+export const DescriptionTitle = styled.p`
   font-weight: 500;
   font-size: 1.75rem;
   line-height: 2.375rem;
-}
+`;
 
-.content-card button {
+
+export const ButtonCard = styled.button`
   width: 11.25rem;
   height: 2.75rem;
+
   font-weight: 500;
   font-size: 1rem;
   padding: 10px 25px;
@@ -48,20 +53,18 @@
   background: var(--black-500);
   color: var(--white);
   border-radius: 8px;
-}
 
-.card-button {
   display: flex;
   align-items: center;
   gap: 8px;
-}
+`;
 
-.image-banner {
+export const ImageBanner = styled.img`
   width: 75rem;
-  height: 31.25rem;
+  height: 34.375rem;
 
   border-radius: 10px;
 
   object-fit: cover;
   filter: brightness(70%)
-}
+`;

@@ -1,32 +1,31 @@
-.categories-content {
+import styled from 'styled-components';
+
+export const CategoryItemContainer = styled.div`
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+`;
 
-}
-
-.content-title {
+export const CategoryTitleHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
-}
 
-.content-title a {
-  color: inherit;
+  a {
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
+  }
+`;
 
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.content-items {
+export const CategoryItemContent = styled.div`
   width: 100%;
   display: flex;
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  /* width: 450px; */
-}
+`;

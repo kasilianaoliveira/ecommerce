@@ -1,7 +1,8 @@
-import "./styles.css"
 import React, { FC } from 'react'
-import { Product } from "../../types/Product"
 import { BsHeart } from "react-icons/bs";
+
+import { Product } from "../../types/Product"
+import { ProductContainer, ProductContent, ProductItemFavorite, ProductItemPrice } from "./ProductCategory";
 
 interface productProps {
   product: Product;
@@ -14,15 +15,17 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
   });
 
   return (
-    <div className="product-item" >
-      <img src={product.imageUrl} alt="" />
-      <div className="product-text">
-        <p className="product-favorite">
-          {product.name}
+    <ProductContainer>
+      <img src={product.imageUrl} alt={`Imagem de ${product.name}`} />
+      <ProductContent>
+        <ProductItemFavorite>
+          <p>{product.name}</p>
           <BsHeart size={18} />
-        </p>
-        <p className="product-price">{filterPrice}</p>
-      </div>
-    </div>
+        </ProductItemFavorite>
+        <ProductItemPrice>
+          {filterPrice}
+        </ProductItemPrice>
+      </ProductContent>
+    </ProductContainer>
   )
 }

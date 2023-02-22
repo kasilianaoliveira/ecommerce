@@ -1,12 +1,16 @@
 :root {
   --white: #ffffff;
   --black: #000000;
+  --transparent: #dededeb3;
+
   --black-300: #171520;
   --black-500: #222121;
   --black-100: #363434;
-
-  --transparent: rgba(222, 222, 222, 0.7);
   --blue-900: #1B4B66;
+
+  --input: #F1F1F1;
+  --placeholder: #6c757d;
+  --error: #FF6A6A;
 }
 
 * {
@@ -27,9 +31,6 @@ body {
   height: 100%;
 }
 
-/* body {
-  color: var(--black-300);
-} */
 
 body::-webkit-scrollbar {
   width: 1rem;
