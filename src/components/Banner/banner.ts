@@ -16,7 +16,7 @@ export const ContentCard = styled.div`
   width: 37.5rem;
   height: 19.75rem;
 
-  background: rgba(222, 222, 222, 0.7);
+  background: var(--transparent);
   backdrop-filter: blur(2.5px);
   border-radius: 24px 10px 0 24px;
 
@@ -57,6 +57,11 @@ export const ButtonCard = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
+  transition:  all .5s;
+
+  &:hover {
+    opacity: 0.92;
+  }
 `;
 
 export const ImageBanner = styled.img`

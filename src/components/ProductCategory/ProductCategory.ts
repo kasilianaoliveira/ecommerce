@@ -12,6 +12,11 @@ export const ProductContainer = styled.div`
     height: 17.875rem;
     object-fit: cover;
     cursor: pointer;
+
+    &:hover{
+    filter: brightness(70%)
+
+    }
   }
 `;
 
