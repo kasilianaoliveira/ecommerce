@@ -40,9 +40,12 @@ export const HeaderIconsItems = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  
 `;
 
 export const IconItem = styled.div`
   display: flex;
   gap: 5px;
+  cursor: pointer;
 `;

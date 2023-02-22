@@ -45,6 +45,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 

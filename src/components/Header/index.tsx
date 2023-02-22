@@ -1,9 +1,15 @@
 import { BsHandbag } from 'react-icons/bs';
 import { BsPerson } from 'react-icons/bs';
 import { BsHeart } from 'react-icons/bs';
+import { Link, useNavigate } from 'react-router-dom';
 import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem } from './header';
 
 export const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/login')
+  }
   return (
     <HeaderContainer >
       <HeaderItemsContainer>
@@ -22,7 +28,7 @@ export const Header = () => {
           <IconItem>
             <BsHeart size={22} />
           </IconItem>
-          <IconItem>
+          <IconItem onClick={handleLoginClick}>
             <BsPerson size={27} />
           </IconItem>
           <IconItem>
@@ -30,6 +36,7 @@ export const Header = () => {
             <span>5</span>
           </IconItem>
         </HeaderIconsItems>
+
       </HeaderItemsContainer>
     </HeaderContainer>
   )
