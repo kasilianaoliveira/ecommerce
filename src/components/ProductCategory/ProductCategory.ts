@@ -5,7 +5,7 @@ export const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
+  margin-left: 10px;
 
   img {
     width: 17.875rem;
@@ -33,11 +33,11 @@ export const ProductContent = styled.div`
 `;
 
 export const ProductItemFavorite = styled.div`
-  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 94%;
+  width: 285px;
 `;
 
 export const ProductItemPrice = styled.p`
