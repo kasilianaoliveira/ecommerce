@@ -25,7 +25,6 @@ export const CategoryTitleHeader = styled.div`
 export const CategoryItemContent = styled.div`
   width: 100%;
   display: flex;
-  flex-grow: 1;
   align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
 `;
