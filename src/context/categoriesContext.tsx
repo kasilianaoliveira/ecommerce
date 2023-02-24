@@ -6,6 +6,7 @@ import { Category } from '../types/category';
 
 import { Product } from '../types/Product';
 import { ProductContextData } from './ContextTypes';
+import { categoryConverter } from '../converters/firestore.converters';
 
 interface ProductProviderProps {
   children: ReactNode;
@@ -24,8 +25,8 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
   const fetchCategories = async () => {
     try {
       const categoriesFromFirestore: Category[] = []
-      const querySnapshot = await getDocs(collection(db, 'categories'))
-      querySnapshot.forEach((doc: any) => {
+      const querySnapshot = await getDocs(collection(db, 'categories').withConverter(categoryConverter))
+      querySnapshot.forEach((doc) => {
         categoriesFromFirestore.push(doc.data())
       })
       setCategories(categoriesFromFirestore)
