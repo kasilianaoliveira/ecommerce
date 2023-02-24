@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+<h1 style="text-align: center; font-weight: bold;">Ecommerce</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center" >
+  <img src="./assets/readme/home.png" height="325" widht="600">
+</div>
 
-## Available Scripts
+## Sobre o Projeto
 
-In the project directory, you can run:
+A ideia dessa aplicação é termos um site onde podemos visualizar e comprar roupas, acessorios ou tênis. Nesse site vamos poder fazer login com email/senha ou com google, além disso podemos navegar entre as categorias expostas, favoritar o produto que mais lhe agrada, adicionar ao carrinho e simular sua compra. Nesse site estamos usando react para sua construção, react hook form para formulários, yup para validações e o firebase para armazenamento dos dados, utilizando os serviços de autenticação e firestore para banco de dados.
 
-### `yarn start`
+### Tecnologias Usadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [React](https://reactjs.org/)
+- [React router](https://reactrouter.com/en/main)
+- [React Hook Form](https://react-hook-form.com/get-started/#Handleerrors)
+- [React icons](https://react-icons.github.io/react-icons)
+- [Styled-components](https://styled-components.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Firebase](https://firebase.google.com/docs?gclsrc=ds&gclid=COSov8qRrf0CFUfEgQodpV4MfA&hl=pt-br)
+- [Axios](https://axios-http.com/ptbr/docs/api_intro)
+- [Yup](https://www.npmjs.com/package/yup)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Como rodar a aplicação
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+# Clone este repositório
+$ git clone https://github.com/kasilianaoliveira/ecommerce
+# Acesse a pasta do projeto
+$ cd ecommerce
+# Instale as dependências
+$ npm install
+# ou
+$ yarn
+# Execute a aplicação em modo de desenvolvimento
+$ yarn start
+```
