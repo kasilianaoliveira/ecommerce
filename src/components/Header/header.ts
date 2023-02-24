@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const HeaderContainer = styled.div`
   width: 100%;
 
-  background-color: var(--black-500);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--black-500);
 
   padding: 10px;
 `;
@@ -21,6 +21,10 @@ export const HeaderItemsContainer = styled.div`
 export const HeaderTitle = styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 

@@ -1,19 +1,21 @@
+
 import { BsHandbag } from 'react-icons/bs';
 import { BsPerson } from 'react-icons/bs';
 import { BsHeart } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem } from './header';
 
 export const Header = () => {
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    navigate('/login')
+  const handleRedirectClick = (link?: string) => {
+    navigate(`/${link}`)
   }
+
   return (
     <HeaderContainer >
       <HeaderItemsContainer>
-        <HeaderTitle>
+        <HeaderTitle onClick={() => handleRedirectClick('')}>
           Norm club
         </HeaderTitle>
 
@@ -25,14 +27,16 @@ export const Header = () => {
         </HeaderListItems>
 
         <HeaderIconsItems>
-          <IconItem>
+
+          <IconItem onClick={() => handleRedirectClick('favoritos')}>
             <BsHeart size={22} />
           </IconItem>
-          <IconItem onClick={handleLoginClick}>
+
+          <IconItem onClick={() => handleRedirectClick('login')}>
             <BsPerson size={27} />
           </IconItem>
           <IconItem>
-            <BsHandbag size={22} />
+            <BsHandbag size={22} onClick={() => handleRedirectClick('carrinho')} />
             <span>5</span>
           </IconItem>
         </HeaderIconsItems>
