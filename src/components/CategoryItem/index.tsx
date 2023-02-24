@@ -8,10 +8,9 @@ import { CategoryItemContainer, CategoryItemContent, CategoryTitleHeader } from 
 
 interface CategoryItemProps {
   category: Category;
-  index?: number;
 }
 export const CategoryItem: FC<CategoryItemProps> = ({ category }) => {
-  console.log(category.imageUrl)
+
   return (
 
     <CategoryItemContainer>
