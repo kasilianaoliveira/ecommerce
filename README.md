@@ -1,7 +1,7 @@
 <h1 style="text-align: center; font-weight: bold;">Ecommerce</h1>
 
 <div align="center" >
-  <img src="./src/assets/readme/home.png" height="325" widht="600">
+  <img src="./assets.home.png" height="325" widht="600">
 </div>
 
 ## Sobre o Projeto
