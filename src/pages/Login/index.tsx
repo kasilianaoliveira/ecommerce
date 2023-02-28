@@ -6,7 +6,7 @@ import LoginImg from "../../assets/login.jpg"
 import { Header } from '../../components/Header/index';
 import { CustomButton } from "../../components/CustomButton";
 
-import { InputContainer, LoginContainer, LoginContent, LoginContentForm, LoginHeadline, LoginInputContainer, LoginSubtitle, RegisterButton } from "./login"
+import { InputContainer, LoginContainer, LoginContent, LoginContentForm, LoginHeadline, LoginInputContainer, LoginSubtitle, RegisterButton, RegisterButtonRedirect } from "./login"
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -39,8 +39,8 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
       <LoginContainer>
+        <Header />
         <LoginContent>
 
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
@@ -75,12 +75,14 @@ export const Login = () => {
               Entrar
             </CustomButton>
 
-            <p>Ainda não tem uma conta?
+            <RegisterButtonRedirect>
+              <p>Ainda não tem uma conta?
 
-              <Link to='/cadastro'>
-                <RegisterButton>Cadastre-se</RegisterButton>
-              </Link>
-            </p>
+                <Link to='/cadastro'>
+                  <RegisterButton>Cadastre-se</RegisterButton>
+                </Link>
+              </p>
+            </RegisterButtonRedirect>
 
           </LoginContentForm>
         </LoginContent >

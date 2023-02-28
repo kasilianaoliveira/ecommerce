@@ -12,13 +12,14 @@ export const RegisterContainer = styled.div`
   margin: 0 auto; 
 
   display: flex;
+  flex-direction: column;
 `;
 export const RegisterContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
-  margin: 10px 0;
+  margin: 50px 0;
   gap: 50px;
   
 
@@ -90,6 +91,9 @@ export const InputContainer = styled.input<CustomInputContainerProps>`
   }
 `;
 
+export const RegisterButtonRedirect = styled.div`
+  margin-top:10px;
+`;
 
 export const RegisterButton = styled.span`
   font-weight: 600;
