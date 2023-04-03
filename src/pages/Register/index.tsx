@@ -1,11 +1,11 @@
-import { AuthError, createUserWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
+import { AuthError, createUserWithEmailAndPassword, AuthErrorCodes, signInWithPopup } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
-import { addDoc, collection } from 'firebase/firestore';
-import { auth, db } from "../../components/config/firestore.config";
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { auth, db, provider } from "../../components/config/firestore.config";
 
 import { MdLogin } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,13 +15,14 @@ import LoginImg from "../../assets/login.jpg"
 import { Header } from '../../components/Header/index';
 import { CustomButton } from "../../components/CustomButton";
 
-import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm, RegisterHeadline, RegisterInputContainer, RegisterButton, RegisterButtonRedirect } from "./register"
+import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm, RegisterHeadline, RegisterInputContainer, RegisterButton, RegisterButtonRedirect, RegisterSubtitle } from "./register"
 
 
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
 import { useContext } from "react";
 import { CategoriesContext } from "../../context/categoriesContext";
+import { BsGoogle } from "react-icons/bs";
 
 
 interface ISignIn {
@@ -71,11 +72,6 @@ export const Register = () => {
       toast.success('Cadastro realizado com sucesso!', {
         position: "bottom-left",
         autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
       });
 
@@ -98,18 +94,64 @@ export const Register = () => {
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
         toast.error(`Erro ao tentar se cadastrar! ${"Email já cadastrado"} `, {
           position: "bottom-left",
-          autoClose: 8000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+          autoClose: 3000,
           theme: "light",
         });
       }
 
     }
 
+  }
+
+  //add cadastro com o google
+  const handleSignInWithGoogle = async () => {
+    try {
+      const userCredentials = await signInWithPopup(auth, provider);
+
+      const user = userCredentials.user;
+
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "users"),
+          where("id", "==", user.uid)
+        )
+      );
+      const userDocs = querySnapshot.docs[0]?.data();
+
+      if (!userDocs) {
+
+        await addDoc(collection(db, "users"), {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+          profile: user.photoURL,
+          provider: "google"
+        })
+
+        toast.success('Cadastro realizado com sucesso!', {
+          position: "bottom-left",
+          autoClose: 1000,
+          theme: "light",
+        });
+
+        setTimeout(() => navigate('/'), 1500)
+
+      } else {
+        toast.error('Email já cadastrado', {
+          position: "bottom-left",
+          autoClose: 3000,
+          theme: "light",
+        });
+      }
+
+    } catch (error) {
+      toast.error(`Erro ao tentar se cadastrar! ${error} `, {
+        position: "bottom-left",
+        autoClose: 3000,
+        theme: "light",
+      });
+
+    }
   }
 
   const { setProfile } = useContext(CategoriesContext);
@@ -126,7 +168,11 @@ export const Register = () => {
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
 
           <RegisterContentForm>
-            <RegisterHeadline>Crie sua conta</RegisterHeadline>
+          <RegisterHeadline>Entre com a sua conta</RegisterHeadline>
+            <CustomButton startIcon={<BsGoogle size={18} />} onClick={handleSignInWithGoogle} >
+              Entrar com o Google
+            </CustomButton>
+            <RegisterSubtitle>ou crie uma conta com o seu e-mail</RegisterSubtitle>
   
             <RegisterInputContainer>
               <p>Nome</p>

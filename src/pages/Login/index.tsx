@@ -1,3 +1,4 @@
+import { ToastContainer, toast } from 'react-toastify';
 import { BsGoogle } from "react-icons/bs"
 import { MdLogin } from "react-icons/md";
 
@@ -11,9 +12,12 @@ import { InputContainer, LoginContainer, LoginContent, LoginContentForm, LoginHe
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
+import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import {  collection, getDocs, query, where } from 'firebase/firestore';
+import { auth, db, provider } from '../../components/config/firestore.config';
 
 interface ISignIn {
   email: string;
@@ -21,6 +25,8 @@ interface ISignIn {
 }
 
 export const Login = () => {
+
+  const navigate = useNavigate();
 
   const schema = yup.object({
     email: yup.string()
@@ -30,12 +36,72 @@ export const Login = () => {
       .required('Senha é um campo obrigatório'),
   })
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ISignIn>({ resolver: yupResolver(schema) });
+  const { register, handleSubmit,resetField, formState: { errors } } = useForm<ISignIn>({ resolver: yupResolver(schema) });
 
-  const handleSubmitClick = (data: any) => {
-    console.log({ data })
+  const handleSubmitClick = async (data: ISignIn) => {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+
+      const resetFields = [
+        'email',
+        'password',
+      ] as const;
+
+      resetFields.forEach((field) => resetField(field))
+
+      navigate('/')
+
+    } catch (error) {
+      
+      const _error = error as AuthError;
+
+      const invalidEmail = AuthErrorCodes.INVALID_EMAIL;
+      const invalidPassword = AuthErrorCodes.INVALID_PASSWORD;
+
+      if (_error.code === invalidPassword || _error.code === invalidEmail) {
+        toast.error(`Erro ao tentar fazer login! ${"Email ou senha incorretos"} `, {
+          position: "bottom-left",
+          autoClose: 3000,
+          theme: "light",
+        });
+      }
+    }
   }
 
+  const handleSignInWithGoogle = async () => {
+    try {
+      const userCredentials = await signInWithPopup(auth, provider);
+
+      const user = userCredentials.user;
+
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "users"),
+          where("id", "==", user.uid)
+        )
+      );
+      const userDocs = querySnapshot.docs[0]?.data();
+
+      if (!userDocs) {
+
+        toast.error(`Erro ao tentar fazer login! Email não cadastrado`, {
+          position: "bottom-left",
+          autoClose: 3000,
+          theme: "light",
+        });
+      }else {
+        navigate('/')
+      }
+
+    } catch (error) {
+      toast.error(`Erro ao tentar se cadastrar! ${error} `, {
+        position: "bottom-left",
+        autoClose: 3000,
+        theme: "light",
+      });
+
+    }
+  }
 
   return (
     <>
@@ -44,14 +110,16 @@ export const Login = () => {
         <LoginContent>
 
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
-          {/* <img src={LoginImg} alt="" /> */}
 
           <LoginContentForm>
             <LoginHeadline>Entre com a sua conta</LoginHeadline>
-            <CustomButton startIcon={<BsGoogle size={18} />}>
-
+            <CustomButton 
+              startIcon={<BsGoogle size={18} />} 
+              onClick={handleSignInWithGoogle}>
+            
               Entrar com o Google
             </CustomButton>
+
             <LoginSubtitle>ou entre com o seu e-mail</LoginSubtitle>
 
             <LoginInputContainer>
@@ -86,6 +154,18 @@ export const Login = () => {
 
           </LoginContentForm>
         </LoginContent >
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </LoginContainer>
     </>
   )
