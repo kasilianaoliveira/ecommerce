@@ -1,10 +1,12 @@
 
+import { signOut } from 'firebase/auth';
 import { useContext } from 'react';
 import { BsHandbag } from 'react-icons/bs';
 import { BsPerson } from 'react-icons/bs';
 import { BsHeart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { CategoriesContext } from '../../context/categoriesContext';
+import { auth } from '../config/firestore.config';
 import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem, ImageIcon } from './header';
 
 export const Header = () => {
@@ -41,6 +43,9 @@ export const Header = () => {
                 </IconItem>
                 <IconItem onClick={() => handleRedirectClick('cadastro')}>
                   <p>Cadastro</p>
+                </IconItem>
+                <IconItem onClick={() => signOut(auth)}>
+                  <p>Sair</p>
                 </IconItem>
               </>
             )
