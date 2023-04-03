@@ -20,7 +20,7 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
 
   //logica do produtos
   const [categories, setCategories] = useState<Category[]>([])
-
+  const [profile, setProfile] = useState<string>('')
 
   const fetchCategories = async () => {
     try {
@@ -59,7 +59,9 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
         productFavorite,
         setProductFavorite,
         addProductFavorite,
-        removeProductFavorite
+        removeProductFavorite,
+        profile,
+        setProfile
       }}
     >
       {children}

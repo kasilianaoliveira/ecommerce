@@ -8,6 +8,9 @@ export interface ProductContextData {
   setProductFavorite: React.Dispatch<React.SetStateAction<Product[]>>;
   categories: Category[];
 
+  profile: string;
+  setProfile: React.Dispatch<React.SetStateAction<string>>;
+
   addProductFavorite: (product: Product) => void;
   removeProductFavorite: (id: string) => void;
 }

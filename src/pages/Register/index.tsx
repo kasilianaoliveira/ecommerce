@@ -1,26 +1,25 @@
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { AuthError, createUserWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
-import "react-toastify/dist/ReactToastify.css";
-import { auth, db, provider } from "../../components/config/firestore.config";
+import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from "../../components/config/firestore.config";
 
-import { BsGoogle } from "react-icons/bs"
 import { MdLogin } from "react-icons/md";
+import "react-toastify/dist/ReactToastify.css";
 
 import LoginImg from "../../assets/login.jpg"
 
 import { Header } from '../../components/Header/index';
 import { CustomButton } from "../../components/CustomButton";
 
-import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm, RegisterHeadline, RegisterInputContainer, RegisterSubtitle, RegisterButton, RegisterButtonRedirect } from "./register"
+import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm, RegisterHeadline, RegisterInputContainer, RegisterButton, RegisterButtonRedirect } from "./register"
 
 
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
-import { addDoc, collection } from 'firebase/firestore';
 import { useContext } from "react";
 import { CategoriesContext } from "../../context/categoriesContext";
 
@@ -37,22 +36,19 @@ export const Register = () => {
 
   const schema = yup.object({
     name: yup
-      .string(),
-    //   .required("Nome é um campo obrigatório"),
-    // lastName: yup
-    //   .string()
-    //   .required("Sobrenome é um campo obrigatório"),
+    .string()
+    .required("Nome é um campo obrigatório"),
     email: yup
-      .string(),
-    //   .email("Digite um email com formato válido")
-    //   .required('Email é um campo obrigatório'),
+      .string()
+      .email("Digite um email com formato válido")
+      .required('Email é um campo obrigatório'),
     password: yup
-      .string(),
-    // .required('Senha é um campo obrigatório')
-    // .min(8, "Digite uma senha com no mínimo 8 caracteres"),
+      .string()
+      .required('Senha é um campo obrigatório')
+      .min(8, "Digite uma senha com no mínimo 8 caracteres"),
     passwordConfirmation: yup
       .string()
-      // .required('Senha é um campo obrigatório')
+      .required('Senha é um campo obrigatório')
       .oneOf([yup.ref('password')], 'Senhas não correspondem'),
 
   })
@@ -68,7 +64,8 @@ export const Register = () => {
         id: user.uid,
         name: data.name,
         email: user.email,
-        profile: ""
+        profile: "",
+        provider: "firebase"
       })
 
       toast.success('Cadastro realizado com sucesso!', {
@@ -95,60 +92,21 @@ export const Register = () => {
 
 
     } catch (error) {
-      toast.error(`Erro ao tentar se cadastrar! ${error}`, {
-        position: "bottom-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
 
-  }
+      const _error = error as AuthError;
 
-  const handleSubmitGoogle = async (data: ISignIn) => {
-    try {
-      const userCredentials = await signInWithPopup(auth, provider);
-      const user = userCredentials.user;
-
-      await addDoc(collection(db, "users"), {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        profile: user.photoURL,
-      })
-
-      const userProfile = user.photoURL;
-      localStorage.setItem("PROFILE", userProfile!)
-
-      toast.success('Cadastro realizado com sucesso!', {
-        position: "bottom-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      navigate('/')
-
-
-    } catch (error) {
-      toast.error(`Erro ao tentar se cadastrar! ${error}`, {
-        position: "bottom-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
+        toast.error(`Erro ao tentar se cadastrar! ${"Email já cadastrado"} `, {
+          position: "bottom-left",
+          autoClose: 8000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
 
     }
 
@@ -168,21 +126,18 @@ export const Register = () => {
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
 
           <RegisterContentForm>
-            <RegisterHeadline>Entre com a sua conta</RegisterHeadline>
-            <CustomButton startIcon={<BsGoogle size={18} />} onClick={() => handleSubmit(handleSubmitGoogle)()}>
-              Entrar com o Google
-            </CustomButton>
-            <RegisterSubtitle>ou crie uma conta com o seu e-mail</RegisterSubtitle>
-
+            <RegisterHeadline>Crie sua conta</RegisterHeadline>
+  
             <RegisterInputContainer>
               <p>Nome</p>
-              <InputContainer hasError={!!errors?.name} type="text" placeholder="Digite seu nome e sobrenome" {...register('name')} required />
+              <InputContainer hasError={!!errors?.name} type="text" placeholder="Digite seu nome completo" {...register('name')} />
               <ErrorMessage>{errors.name?.message}</ErrorMessage>
+
             </RegisterInputContainer>
 
             <RegisterInputContainer>
               <p>E-mail</p>
-              <InputContainer hasError={!!errors?.email} type="text" placeholder="Digite seu e-mail" {...register('email')} required />
+              <InputContainer hasError={!!errors?.email} type="text" placeholder="Digite seu e-mail" {...register('email')} />
               <ErrorMessage>{errors.email?.message}</ErrorMessage>
             </RegisterInputContainer>
 
@@ -200,7 +155,8 @@ export const Register = () => {
 
             <CustomButton
               startIcon={<MdLogin size={20} />}
-              onClick={() => handleSubmit(handleSubmitClick)()}>
+              onClick={() => handleSubmit(handleSubmitClick)()}
+            >
 
               Criar Conta
             </CustomButton>
@@ -219,7 +175,7 @@ export const Register = () => {
         </RegisterContent >
         <ToastContainer
           position="bottom-left"
-          autoClose={5002}
+          autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

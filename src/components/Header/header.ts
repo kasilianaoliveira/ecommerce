@@ -53,3 +53,10 @@ export const IconItem = styled.div`
   gap: 5px;
   cursor: pointer;
 `;
+
+
+export const ImageIcon = styled.img`
+ border-radius: 50%;
+  cursor: pointer;
+  width: 28px;
+`;
