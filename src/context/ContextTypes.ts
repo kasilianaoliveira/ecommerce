@@ -1,5 +1,6 @@
 import { Category } from "../types/category";
 import { Product } from "../types/Product";
+import { User } from "../types/User";
 
 
 export interface ProductContextData {
@@ -14,3 +15,12 @@ export interface ProductContextData {
   addProductFavorite: (product: Product) => void;
   removeProductFavorite: (id: string) => void;
 }
+
+export interface UserContextData {
+  currentUser:  User | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  isAuthenticated : boolean;
+  loginUser: (user: User) => void;
+  logoutUser: () => void;
+}
+

@@ -46,11 +46,12 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
 
   const addProductFavorite = (product: Product) => setProductFavorite([...productFavorite, product])
 
-
   const removeProductFavorite = (id: string) => {
+
     const filterRemove = productFavorite.filter(product => product.id !== id);
     setProductFavorite(filterRemove)
   }
+
 
   return (
     <CategoriesContext.Provider

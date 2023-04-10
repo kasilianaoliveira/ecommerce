@@ -18,6 +18,8 @@ import { ImageContainer } from "../../components/ImgeContainer";
 import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import {  collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db, provider } from '../../components/config/firestore.config';
+import { UserContext } from '../../context/userContext';
+import { useContext } from 'react';
 
 interface ISignIn {
   email: string;
@@ -41,7 +43,7 @@ export const Login = () => {
   const handleSubmitClick = async (data: ISignIn) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-
+ 
       const resetFields = [
         'email',
         'password',
