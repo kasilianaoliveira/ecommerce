@@ -6,7 +6,8 @@ export const HeaderContainer = styled.div`
   background-color: var(--white);
   color: var(--black-500);
 
-  padding: 10px;
+  padding: 20px;
+  /* margin: 0 20px; */
 `;
 
 export const HeaderItemsContainer = styled.div`

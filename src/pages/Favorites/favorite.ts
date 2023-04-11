@@ -27,6 +27,7 @@ export const FavoriteTitleHeader = styled.div`
 
 
   h3 {
+    font-weight: bold;
     font-size: 40px;
   }
 `;
@@ -59,7 +60,7 @@ export const NotFoundTextContent = styled.div`
   margin-top: 8px;
 
   p {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 40px;
   }
 `;

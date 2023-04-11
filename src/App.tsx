@@ -10,6 +10,7 @@ import { Register } from './pages/Register/index';
 import { UserContext } from './context/userContext';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { ChakraProvider } from "@chakra-ui/react";
+import { userConverter } from "./converters/firestore.converters";
 
 function App() {
 
@@ -25,9 +26,9 @@ function App() {
 
     const isSigningIn = !isAuthenticated && user;
     if (isSigningIn) {
-      const querySnapshot = await getDocs(query(collection(db, 'users'), where('id', '==', user.uid)))
+      const querySnapshot = await getDocs(query(collection(db, 'users').withConverter(userConverter), where('id', '==', user.uid)))
       const userFromFirestore = querySnapshot.docs[0]?.data()
-      return loginUser(userFromFirestore as any);
+      return loginUser(userFromFirestore);
     }
 
   })

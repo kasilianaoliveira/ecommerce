@@ -13,6 +13,10 @@ export const CategoryTitleHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
+  
+  h3{
+    font-weight: 500;
+  }
 
   a {
     color: inherit;

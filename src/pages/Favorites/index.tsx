@@ -36,7 +36,7 @@ export const Favorites = () => {
                 <FavoriteNotFoundContainer>
                   <img src={favoriteNotFound} alt="" />
                   <NotFoundTextContent>
-                    <p>Você ainda não tem favoritos</p>
+                    <p>Você ainda não tem favoritos.</p>
                     <p>Favorite um para poder ver aqui</p>
                   </NotFoundTextContent>
                 </FavoriteNotFoundContainer>
