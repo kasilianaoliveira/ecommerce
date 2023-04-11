@@ -11,6 +11,7 @@ import { UserContext } from './context/userContext';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { ChakraProvider } from "@chakra-ui/react";
 import { userConverter } from "./converters/firestore.converters";
+import { Loading } from "./components/Loading";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
           <Route path="/favoritos" element={<Favorites />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

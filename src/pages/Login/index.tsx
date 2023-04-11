@@ -16,10 +16,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
 import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import {  collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db, provider } from '../../components/config/firestore.config';
 import { UserContext } from '../../context/userContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { Loading } from '../../components/Loading';
 
 interface ISignIn {
   email: string;
@@ -29,6 +30,7 @@ interface ISignIn {
 export const Login = () => {
 
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const schema = yup.object({
     email: yup.string()
@@ -38,12 +40,14 @@ export const Login = () => {
       .required('Senha é um campo obrigatório'),
   })
 
-  const { register, handleSubmit,resetField, formState: { errors } } = useForm<ISignIn>({ resolver: yupResolver(schema) });
+  const { register, handleSubmit, resetField, formState: { errors } } = useForm<ISignIn>({ resolver: yupResolver(schema) });
 
   const handleSubmitClick = async (data: ISignIn) => {
     try {
+      setIsLoading(true);
+
       await signInWithEmailAndPassword(auth, data.email, data.password);
- 
+
       const resetFields = [
         'email',
         'password',
@@ -54,7 +58,7 @@ export const Login = () => {
       navigate('/')
 
     } catch (error) {
-      
+
       const _error = error as AuthError;
 
       const invalidEmail = AuthErrorCodes.INVALID_EMAIL;
@@ -67,11 +71,15 @@ export const Login = () => {
           theme: "light",
         });
       }
+    } finally {
+      setIsLoading(false);
     }
   }
 
   const handleSignInWithGoogle = async () => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithPopup(auth, provider);
 
       const user = userCredentials.user;
@@ -91,7 +99,7 @@ export const Login = () => {
           autoClose: 3000,
           theme: "light",
         });
-      }else {
+      } else {
         navigate('/')
       }
 
@@ -102,6 +110,8 @@ export const Login = () => {
         theme: "light",
       });
 
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -109,16 +119,18 @@ export const Login = () => {
     <>
       <LoginContainer>
         <Header />
+
+        {isLoading && <Loading />}
         <LoginContent>
 
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
 
           <LoginContentForm>
             <LoginHeadline>Entre com a sua conta</LoginHeadline>
-            <CustomButton 
-              startIcon={<BsGoogle size={18} />} 
+            <CustomButton
+              startIcon={<BsGoogle size={18} />}
               onClick={handleSignInWithGoogle}>
-            
+
               Entrar com o Google
             </CustomButton>
 

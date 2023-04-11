@@ -14,12 +14,14 @@ export interface ProductContextData {
 
   addProductFavorite: (product: Product) => void;
   removeProductFavorite: (id: string) => void;
+  // setIsLoadingCategories: (value: React.SetStateAction<boolean>) => void
+  isLoadingCategories: boolean;
 }
 
 export interface UserContextData {
-  currentUser:  User | null;
+  currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
-  isAuthenticated : boolean;
+  isAuthenticated: boolean;
   loginUser: (user: User) => void;
   logoutUser: () => void;
 }

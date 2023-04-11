@@ -20,9 +20,10 @@ import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm
 
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CategoriesContext } from "../../context/categoriesContext";
 import { BsGoogle } from "react-icons/bs";
+import { Loading } from "../../components/Loading";
 
 
 interface ISignIn {
@@ -34,11 +35,12 @@ interface ISignIn {
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const schema = yup.object({
     name: yup
-    .string()
-    .required("Nome é um campo obrigatório"),
+      .string()
+      .required("Nome é um campo obrigatório"),
     email: yup
       .string()
       .email("Digite um email com formato válido")
@@ -58,6 +60,7 @@ export const Register = () => {
 
   const handleSubmitClick = async (data: ISignIn) => {
     try {
+      setIsLoading(true)
       const userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password);
       const user = userCredentials.user;
 
@@ -99,6 +102,8 @@ export const Register = () => {
         });
       }
 
+    } finally {
+      setIsLoading(false)
     }
 
   }
@@ -106,6 +111,8 @@ export const Register = () => {
   //add cadastro com o google
   const handleSignInWithGoogle = async () => {
     try {
+      setIsLoading(true)
+
       const userCredentials = await signInWithPopup(auth, provider);
 
       const user = userCredentials.user;
@@ -151,6 +158,9 @@ export const Register = () => {
         theme: "light",
       });
 
+    } finally {
+      setIsLoading(false)
+
     }
   }
 
@@ -163,17 +173,18 @@ export const Register = () => {
     <>
       <RegisterContainer>
         <Header />
+        {isLoading && <Loading />}
         <RegisterContent>
 
           <ImageContainer src={LoginImg} alt="Homem olhando roupas" />
 
           <RegisterContentForm>
-          <RegisterHeadline>Entre com a sua conta</RegisterHeadline>
+            <RegisterHeadline>Entre com a sua conta</RegisterHeadline>
             <CustomButton startIcon={<BsGoogle size={18} />} onClick={handleSignInWithGoogle} >
               Entrar com o Google
             </CustomButton>
             <RegisterSubtitle>ou crie uma conta com o seu e-mail</RegisterSubtitle>
-  
+
             <RegisterInputContainer>
               <p>Nome</p>
               <InputContainer hasError={!!errors?.name} type="text" placeholder="Digite seu nome completo" {...register('name')} />
