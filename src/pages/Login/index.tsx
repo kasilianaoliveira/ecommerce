@@ -19,7 +19,7 @@ import { AuthError, AuthErrorCodes, signInWithEmailAndPassword, signInWithPopup 
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db, provider } from '../../components/config/firestore.config';
 import { UserContext } from '../../context/userContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Loading } from '../../components/Loading';
 
 interface ISignIn {
@@ -30,6 +30,15 @@ interface ISignIn {
 export const Login = () => {
 
   const navigate = useNavigate();
+  const {isAuthenticated} = useContext(UserContext)
+  
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate('/')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[isAuthenticated])
+  
   const [isLoading, setIsLoading] = useState(false);
 
   const schema = yup.object({

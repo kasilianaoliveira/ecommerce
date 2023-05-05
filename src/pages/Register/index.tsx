@@ -20,10 +20,11 @@ import { InputContainer, RegisterContainer, RegisterContent, RegisterContentForm
 
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ImageContainer } from "../../components/ImgeContainer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CategoriesContext } from "../../context/categoriesContext";
 import { BsGoogle } from "react-icons/bs";
 import { Loading } from "../../components/Loading";
+import { UserContext } from "../../context/userContext";
 
 
 interface ISignIn {
@@ -35,6 +36,16 @@ interface ISignIn {
 
 export const Register = () => {
   const navigate = useNavigate();
+  const {isAuthenticated} = useContext(UserContext)
+
+    
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate('/')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[isAuthenticated])
+
   const [isLoading, setIsLoading] = useState(false);
 
   const schema = yup.object({
