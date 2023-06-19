@@ -1,6 +1,8 @@
 import { DocumentData, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 import { Category } from "../types/category";
 import { User } from "../types/User";
+import { Product } from "../types/Product";
+import { Favorites } from "../types/Favorites";
 
 export const categoryConverter = {
 
@@ -36,6 +38,25 @@ export const userConverter = {
       email: data.email,
       profile: data.profile,
       provider: data.provider,
+    }
+  }
+}
+
+export const favoriteConverter = {
+
+  toFirestore(favorite: Favorites): DocumentData {
+    return { ...favorite }
+  },
+
+  fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Favorites {
+    const data = snapshot.data(options);
+
+    return {
+      id: data.id,
+      price: data.price,
+      name: data.name,
+      imageUrl: data.imageUrl,
+      userId: data.userId,
     }
   }
 }

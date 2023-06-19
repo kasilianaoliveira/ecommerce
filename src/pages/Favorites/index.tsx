@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { Header } from '../../components/Header';
 import { ProductCategory } from '../../components/ProductCategory'
-import { CategoriesContext } from '../../context/categoriesContext';
 import { FavoriteCard, FavoriteContainer, FavoriteContent, FavoriteTitleHeader, FavoriteNotFoundContainer, NotFoundTextContent } from './favorite';
 import favoriteNotFound from '../../assets/notFound.svg';
+import { FavoritesContext } from '../../context/favoriteContext';
 export const Favorites = () => {
 
-  const { productFavorite } = useContext(CategoriesContext);
+  const { productFavorite } = useContext(FavoritesContext);
 
   const favoritesExists = productFavorite.length
 

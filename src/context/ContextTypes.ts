@@ -1,3 +1,4 @@
+import { Cart } from "../types/Cart";
 import { Category } from "../types/category";
 import { Product } from "../types/Product";
 import { User } from "../types/User";
@@ -5,24 +6,36 @@ import { User } from "../types/User";
 
 export interface ProductContextData {
 
-  productFavorite: Product[];
-  setProductFavorite: React.Dispatch<React.SetStateAction<Product[]>>;
   categories: Category[];
 
   profile: string;
   setProfile: React.Dispatch<React.SetStateAction<string>>;
-
-  addProductFavorite: (product: Product) => void;
-  removeProductFavorite: (id: string) => void;
-  // setIsLoadingCategories: (value: React.SetStateAction<boolean>) => void
+  
   isLoadingCategories: boolean;
+
+  fetchCategories: () => Promise<void>;
+
 }
 
 export interface UserContextData {
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
   isAuthenticated: boolean;
+
   loginUser: (user: User) => void;
   logoutUser: () => void;
 }
 
+export interface CartContextData {
+  isVisible: boolean;
+  products: Cart[];
+  
+  toggleCart: () => void;
+}
+
+export interface FavoritesContextData{
+  fetchFavoritesByUser: (userId: string) => Promise<void>;
+  addFavorite: (favorite: Product) => Promise<void>;
+  removeFavorite: (favoritoId: string) => Promise<void>;
+  productFavorite: Product[];
+}
