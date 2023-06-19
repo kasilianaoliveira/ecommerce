@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode, useContext, useEffect, useState} from 'react';
 import { User } from '../types/User';
-import { CategoriesContext } from './categoriesContext';
+// import { CategoriesContext } from './categoriesContext';
 
 import { UserContextData } from './ContextTypes';
 
@@ -16,7 +16,7 @@ export const UserContextProvider: FC<UserProviderProps> = ({
 }: UserProviderProps) => {
 
   const [currentUser, setCurrentUser] = useState<User | null >(null)
-  const { setProductFavorite } = useContext(CategoriesContext);
+  // const { setProductFavorite } = useContext(CategoriesContext);
 
   const loginUser = (user: User) => {
     setCurrentUser(user);
@@ -27,12 +27,12 @@ export const UserContextProvider: FC<UserProviderProps> = ({
 
  const isAuthenticated = currentUser !== null;
 
- useEffect(() => {
+//  useEffect(() => {
     
-  if (!isAuthenticated) {
-    setProductFavorite([]);
-  }
-}, [isAuthenticated, setProductFavorite])
+//   if (!isAuthenticated) {
+//     setProductFavorite([]);
+//   }
+// }, [isAuthenticated, setProductFavorite])
 
   return (
     <UserContext.Provider

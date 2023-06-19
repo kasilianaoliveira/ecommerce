@@ -53,9 +53,9 @@ function App() {
           <Route path="/cadastro" element={<Register />} />
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/produtos/:nameProduct" element={<Product />} />
-          <Route path="/carrinho" element={<Cart />} />
 
         </Routes>
+        <Cart/>
       </BrowserRouter>
     </ChakraProvider>
   );

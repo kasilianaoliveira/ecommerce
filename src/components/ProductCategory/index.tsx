@@ -1,6 +1,8 @@
 import { FC, useContext } from 'react'
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
 import { CategoriesContext } from '../../context/categoriesContext';
 import {
   Modal,
@@ -15,9 +17,12 @@ import {
 } from '@chakra-ui/react';
 
 import { Product } from '../../types/Product';
-import { ProductContainer, ProductContent, ProductItemFavorite, ProductItemPrice } from "./ProductCategory";
+import { ImageContainer, ProductContainer, ProductContent, ProductItemFavorite, ProductItemPrice } from "./ProductCategory";
 import { UserContext } from '../../context/userContext';
 import { Link } from 'react-router-dom';
+
+import { ToastContainer, toast } from 'react-toastify';
+import { FavoritesContext } from '../../context/favoriteContext';
 interface productProps {
   product: Product;
 }
@@ -29,34 +34,40 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
   });
 
 
-  const { productFavorite, addProductFavorite, removeProductFavorite } = useContext(CategoriesContext);
+  const { addFavorite, removeFavorite, productFavorite } = useContext(FavoritesContext);
   const { isAuthenticated } = useContext(UserContext);
 
-  const isFavorite = productFavorite.some(productFavorite => productFavorite.id === product.id);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const isFavorite = (product: Product): boolean => {
+    return productFavorite.some((favorite) => favorite.id === product.id);
+  };
 
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <ProductContainer>
-      <img src={product.imageUrl} alt={`Imagem de ${product.name}`} />
+      <ImageContainer>
+        <img src={product.imageUrl} alt={`Imagem de ${product.name}`} />
+        <Button>
+          <BsFillCartCheckFill />
+          Adicionar ao carrinho
+        </Button>
+      </ImageContainer>
+
       <ProductContent>
         <ProductItemFavorite>
           <p>{product.name}</p>
           <>
-            {isAuthenticated ? !isFavorite
-              ? 
+            {isAuthenticated ? !isFavorite(product)
+              ?
               <Button aria-label="Adicionar aos favoritos">
-                <BsHeart size={18} onClick={() => isFavorite
-                  ? removeProductFavorite(product.id)
-                  : addProductFavorite(product)} />
-              </Button>
-              : 
-              <Button aria-label="Remover dos favoritos">
-                <BsHeartFill size={18} onClick={() => isFavorite
-                  ? removeProductFavorite(product.id)
-                  : addProductFavorite(product)} />
+                <BsHeart size={18} onClick={() => addFavorite(product)} />
               </Button>
               :
-              <Button onClick={onOpen}><BsHeart size={18} /></Button>
+              <Button aria-label="Remover dos favoritos">
+                <BsHeartFill size={18} onClick={() => removeFavorite(product.id)} />
+              </Button>
+              :
+              <Button onClick={onOpen} aria-label='Modal'><BsHeart size={18} /></Button>
             }
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
@@ -83,6 +94,18 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
           {filterPrice}
         </ProductItemPrice>
       </ProductContent>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </ProductContainer>
   )
 }

@@ -38,8 +38,58 @@ export const ProductItemFavorite = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 285px;
+
+  /* button {
+    background-color: transparent;
+  } */
 `;
 
 export const ProductItemPrice = styled.p`
    color: #626262;
 `;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  /* background-color: red; */
+
+  img {
+    border-radius: 10px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    background-color: var(--black-500);
+    color: white;
+    width: 15.625rem;
+
+    position: absolute;
+    bottom:0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    
+    transform: translateX(-50%, -50%);
+
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+  }
+
+
+  &:hover button {
+    opacity: 1;
+    transform: translateY(-30%);
+  
+
+  }
+
+  button:hover{
+    background-color: white;
+    color: var(--black-500);
+
+  }
+`

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 
 
 import { CategoryItem } from '../CategoryItem/index';
@@ -8,7 +8,15 @@ import { Loading } from '../Loading';
 
 export const Categories = () => {
 
-  const { categories, isLoadingCategories } = useContext(CategoriesContext);
+  const { categories,fetchCategories, isLoadingCategories } = useContext(CategoriesContext);
+
+  // const memoizedFetchCategories = useCallback(() => {
+  //   fetchCategories();
+  // }, [fetchCategories]);
+
+  // useEffect(() => {
+  //   memoizedFetchCategories();
+  // }, [memoizedFetchCategories]);
 
   return (
     <CategoriesContainer>

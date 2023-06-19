@@ -8,28 +8,22 @@ export const BannerContainer = styled.div`
 `;
 
 export const ContentCard = styled.div`
-  z-index: 1;
-
   position: absolute;
-  right: 0px;
+  z-index: 1;
   top: 20%;
-
+  right: 0;
   width: 37.5rem;
   height: 19.75rem;
-
   background: var(--transparent);
   backdrop-filter: blur(2.5px);
   border-radius: 24px 10px 0 24px;
-
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.9375rem;
-
   color: var(--black-500);
-
   padding: 48px;
+
 `;
 
 export const BannerTitle = styled.h3`

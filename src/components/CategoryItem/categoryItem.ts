@@ -18,12 +18,6 @@ export const CategoryTitleHeader = styled.div`
     font-weight: 500;
   }
 
-  a {
-    color: inherit;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; 
-  }
 `;
 
 export const CategoryItemContent = styled.div`
@@ -32,3 +26,11 @@ export const CategoryItemContent = styled.div`
   align-items: center;
   flex-wrap: wrap;
 `;
+
+
+export const CategoryView = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+`

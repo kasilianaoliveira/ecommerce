@@ -3,12 +3,14 @@ import { signOut } from 'firebase/auth';
 import { useContext } from 'react';
 import { BsHandbag } from 'react-icons/bs';
 import { BsHeart } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
 import { auth } from '../config/firestore.config';
-import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem} from './header';
+import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem } from './header';
+import { CartContext } from '../../context/cartContext';
 
 export const Header = () => {
+  const {  toggleCart } = useContext(CartContext)
   const { isAuthenticated } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -26,11 +28,23 @@ export const Header = () => {
         </HeaderTitle>
 
         <HeaderListItems>
-          <li aria-label="Masculino" tabIndex={2}>Masculino</li>
-          <li aria-label="Feminino" tabIndex={3}>Feminino</li>
-          <li aria-label="Tênis" tabIndex={4}>Tênis</li>
-          <li aria-label="Chapéus" tabIndex={5}>Chapéus</li>
-          <li aria-label="Jaquetas" tabIndex={6}>Jaquetas</li>
+          <li aria-label="Masculino" tabIndex={2}>
+            <Link to='/produtos/Masculino'>Masculino</Link>
+          </li>
+          <li aria-label="Feminino" tabIndex={3}>
+            <Link to='/produtos/Feminino'>Feminino</Link>
+
+          </li>
+          <li aria-label="Tênis" tabIndex={4}>
+            <Link to='/produtos/Tênis'>Tênis</Link>
+          </li>
+          <li aria-label="Chapéus" tabIndex={5}>
+          <Link to='/produtos/Chapéus'>Tênis</Link>
+
+          </li>
+          <li aria-label="Jaquetas" tabIndex={6}>
+            <Link to='/produtos/Jaquetas'>Jaquetas</Link>
+          </li>
 
         </HeaderListItems>
 
@@ -48,17 +62,17 @@ export const Header = () => {
             </>
           }
           {
-            isAuthenticated && <IconItem onClick={() => signOut(auth)}  aria-label="Sair" tabIndex={9}>
+            isAuthenticated && <IconItem onClick={() => signOut(auth)} aria-label="Sair" tabIndex={9}>
               <p>Sair</p>
             </IconItem>
           }
 
           <IconItem aria-label="Favoritos" tabIndex={10}>
-            <BsHeart size={22} onClick={() => handleRedirectClick('favoritos')}/>
+            <BsHeart size={22} onClick={() => handleRedirectClick('favoritos')} />
           </IconItem>
 
           <IconItem aria-label="Carrinho de compras" tabIndex={11}>
-            <BsHandbag size={22} onClick={() => handleRedirectClick('carrinho')} />
+            <BsHandbag size={22} onClick={toggleCart} />
             <span>5</span>
           </IconItem>
           {/* 
