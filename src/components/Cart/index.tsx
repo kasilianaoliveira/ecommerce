@@ -25,7 +25,6 @@ export const Cart = () => {
     currency: "BRL",
   });
 
-  // console.log(totalQuantity)
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart} />

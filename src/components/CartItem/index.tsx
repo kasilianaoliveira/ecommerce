@@ -7,6 +7,8 @@ import {
   CartItemQuantity,
   RemoveButton
 } from './styles'
+import { useContext, useEffect } from 'react';
+import { CartContext } from '../../context/cartContext';
 
 
 interface CartItemProps {
@@ -14,6 +16,10 @@ interface CartItemProps {
 }
 
 export const CartItem = ({ product }: CartItemProps) => {
+
+  const { addProductToCart, removeProductFromCart, decreaseProductQuantity } = useContext(CartContext)
+
+
   return (
     <CartItemContainer>
       <CartItemImage imageUrl={product.imageUrl} />
@@ -23,14 +29,14 @@ export const CartItem = ({ product }: CartItemProps) => {
         <p>R${product.price}</p>
 
         <CartItemQuantity>
-          <AiOutlineMinus size={18} />
+          <AiOutlineMinus size={18} onClick={() => decreaseProductQuantity(product.id)}/>
           <p>{product.quantity}</p>
-          <AiOutlinePlus size={18} />
+          <AiOutlinePlus size={18} onClick={() => addProductToCart(product)} />
         </CartItemQuantity>
       </CartItemInfo>
 
       <RemoveButton>
-        <AiOutlineClose size={22} />
+        <AiOutlineClose size={22} onClick={() => removeProductFromCart(product.id)} />
       </RemoveButton>
     </CartItemContainer>
   )

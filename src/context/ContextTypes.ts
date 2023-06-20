@@ -10,7 +10,7 @@ export interface ProductContextData {
 
   profile: string;
   setProfile: React.Dispatch<React.SetStateAction<string>>;
-  
+
   isLoadingCategories: boolean;
 
   fetchCategories: () => Promise<void>;
@@ -29,13 +29,14 @@ export interface UserContextData {
 export interface CartContextData {
   isVisible: boolean;
   products: Cart[];
-  
-  toggleCart: () => void;
-  addProductToCart: (product: Product) => void;
 
+  toggleCart: () => void;
+  removeProductFromCart: (productId: string) => void;
+  addProductToCart: (product: Product) => void;
+  decreaseProductQuantity: (productId: string) => void
 }
 
-export interface FavoritesContextData{
+export interface FavoritesContextData {
   fetchFavoritesByUser: (userId: string) => Promise<void>;
   addFavorite: (favorite: Product) => Promise<void>;
   removeFavorite: (favoritoId: string) => Promise<void>;

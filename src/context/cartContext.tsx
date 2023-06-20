@@ -23,28 +23,44 @@ export const CartContextProvider: FC<CartProviderProps> = ({
   }
 
   const addProductToCart = (product: Product) => {
-    // verificar se o produto já está no carrinho
+
     const productIsAlreadyInCart = products.some(
       (item) => item.id === product.id
     )
 
-    // console.log(products)
-    // se sim -> aumentar sua quantidade
     if (productIsAlreadyInCart) {
 
-      const newCartProduct = products.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-
-      return setProducts(newCartProduct);
+      return setProducts(prevState =>
+        prevState.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        ));
     }
 
-    // se não -> adicioná-lo
     setProducts((prevState) => [...prevState, { ...product, quantity: 1 }])
   }
 
+  const decreaseProductQuantity = (productId: string) => {
+    setProducts((products) =>
+      products.map(product =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity - 1 }
+          : product
+      ).filter(product => product.quantity > 0)
+    );
+  }
+
+
+
+  const removeProductFromCart = (productId: string) => {
+    setProducts((prevState) =>
+      prevState.filter((item) => item.id !== productId)
+    );
+  };
+
   useEffect(() => {
-    console.log(products); // Verifica se o carrinho é atualizado corretamente
+    console.log(products);
   }, [products]);
   return (
     <CartContext.Provider
@@ -52,7 +68,9 @@ export const CartContextProvider: FC<CartProviderProps> = ({
         isVisible,
         products,
         toggleCart,
-        addProductToCart
+        addProductToCart,
+        removeProductFromCart,
+        decreaseProductQuantity
       }}
     >
       {children}
