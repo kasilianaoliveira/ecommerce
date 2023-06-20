@@ -31,6 +31,8 @@ export interface CartContextData {
   products: Cart[];
   
   toggleCart: () => void;
+  addProductToCart: (product: Product) => void;
+
 }
 
 export interface FavoritesContextData{

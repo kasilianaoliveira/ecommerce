@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import { FavoritesContext } from '../../context/favoriteContext';
+import { CartContext } from '../../context/cartContext';
 interface productProps {
   product: Product;
 }
@@ -36,18 +37,24 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
 
   const { addFavorite, removeFavorite, productFavorite } = useContext(FavoritesContext);
   const { isAuthenticated } = useContext(UserContext);
+  const { addProductToCart } = useContext(CartContext);
+
 
   const isFavorite = (product: Product): boolean => {
     return productFavorite.some((favorite) => favorite.id === product.id);
   };
 
 
+
+  const handleAddToCartClick = (product: Product) => {
+    addProductToCart(product);
+  }
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <ProductContainer>
       <ImageContainer>
         <img src={product.imageUrl} alt={`Imagem de ${product.name}`} />
-        <Button>
+        <Button onClick={() => handleAddToCartClick(product)}>
           <BsFillCartCheckFill />
           Adicionar ao carrinho
         </Button>

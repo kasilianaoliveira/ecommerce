@@ -10,7 +10,7 @@ import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContaine
 import { CartContext } from '../../context/cartContext';
 
 export const Header = () => {
-  const {  toggleCart } = useContext(CartContext)
+  const { toggleCart,products } = useContext(CartContext)
   const { isAuthenticated } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -18,13 +18,14 @@ export const Header = () => {
   const handleRedirectClick = (link?: string) => {
     navigate(`/${link}`)
   }
-
+  const totalQuantity = products.reduce((accumulator, product) =>
+    accumulator + product.quantity , 0);
 
   return (
     <HeaderContainer >
       <HeaderItemsContainer>
         <HeaderTitle onClick={() => handleRedirectClick('')} aria-label="Norm Club" tabIndex={1}>
-          Norm club
+          Dream Store
         </HeaderTitle>
 
         <HeaderListItems>
@@ -39,7 +40,7 @@ export const Header = () => {
             <Link to='/produtos/Tênis'>Tênis</Link>
           </li>
           <li aria-label="Chapéus" tabIndex={5}>
-          <Link to='/produtos/Chapéus'>Tênis</Link>
+            <Link to='/produtos/Chapéus'>Tênis</Link>
 
           </li>
           <li aria-label="Jaquetas" tabIndex={6}>
@@ -73,7 +74,7 @@ export const Header = () => {
 
           <IconItem aria-label="Carrinho de compras" tabIndex={11}>
             <BsHandbag size={22} onClick={toggleCart} />
-            <span>5</span>
+            <span>{totalQuantity}</span>
           </IconItem>
           {/* 
           add nome da pessoa "Olá, fulano"

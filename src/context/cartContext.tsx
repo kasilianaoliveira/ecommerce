@@ -28,26 +28,31 @@ export const CartContextProvider: FC<CartProviderProps> = ({
       (item) => item.id === product.id
     )
 
+    // console.log(products)
     // se sim -> aumentar sua quantidade
     if (productIsAlreadyInCart) {
-      return setProducts((products) =>
-        products.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      )
+
+      const newCartProduct = products.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+
+      return setProducts(newCartProduct);
     }
 
     // se não -> adicioná-lo
     setProducts((prevState) => [...prevState, { ...product, quantity: 1 }])
   }
+
+  useEffect(() => {
+    console.log(products); // Verifica se o carrinho é atualizado corretamente
+  }, [products]);
   return (
     <CartContext.Provider
       value={{
         isVisible,
         products,
-        toggleCart
+        toggleCart,
+        addProductToCart
       }}
     >
       {children}

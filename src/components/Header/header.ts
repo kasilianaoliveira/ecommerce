@@ -53,6 +53,9 @@ export const IconItem = styled.div`
   display: flex;
   gap: 5px;
   cursor: pointer;
+  span {
+   font-weight: 600;
+  }
 `;
 
 

@@ -10,19 +10,35 @@ import {
 } from './styles'
 import { CustomButton } from '../CustomButton'
 import { BsCartCheck } from 'react-icons/bs'
+import { CartItem } from '../CartItem'
 
 export const Cart = () => {
-  const { isVisible, toggleCart } = useContext(CartContext)
+  const { isVisible, toggleCart, products } = useContext(CartContext)
 
+  const totalValueCart = products.reduce((accumulator, product) =>
+    accumulator + (product.price * product.quantity), 0);
+
+
+
+  const filterPrice = totalValueCart.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  // console.log(totalQuantity)
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart} />
       <CartContent>
         <CartTitle>Seu Carrinho</CartTitle>
 
-        {/* produtos */}
+        {
+          products.map(product => (
+            <CartItem key={product.id} product={product}/>
+          ))
+        }
 
-        <CartTotal>Total: R$999</CartTotal>
+        <CartTotal>Total: {filterPrice}</CartTotal>
 
         <CustomButton startIcon={<BsCartCheck />}>
           Ir para o Checkout
