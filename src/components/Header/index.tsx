@@ -11,7 +11,6 @@ import { UserContext } from '../../context/userContext';
 import { auth } from '../config/firestore.config';
 import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem, NavBar, StyledIconItem } from './header';
 import { CartContext } from '../../context/cartContext';
-import { push as Menu } from 'react-burger-menu'
 
 export const Header = () => {
   const { toggleCart, products } = useContext(CartContext)
