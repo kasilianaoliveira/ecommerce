@@ -22,6 +22,8 @@ max-width: 1200px;
   }
 
   @media (max-width: 820px) {
+
+
     padding: 0 20px;
     img {
     width: 200px;
@@ -31,6 +33,7 @@ max-width: 1200px;
 }
 
   @media (max-width: 420px) {
+    margin-left: 0;
     max-width: 380px;
    img {
      width: 100vw;
