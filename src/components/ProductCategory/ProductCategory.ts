@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const ProductContainer = styled.div`
+max-width: 1200px;
   margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-left: 0.625rem;
+
+  margin-left: 12px;
 
   img {
     width: 17.875rem;
@@ -20,12 +22,21 @@ export const ProductContainer = styled.div`
   }
 
   @media (max-width: 820px) {
-   
+    padding: 0 20px;
     img {
     width: 200px;
     height: 200px;
 
   }
+}
+
+  @media (max-width: 380px) {
+    max-width: 380px;
+   img {
+     width: 100vw;
+   /* height: 200px; */
+
+    }
 
   }
 `;
@@ -53,8 +64,14 @@ export const ProductItemFavorite = styled.div`
     background-color: transparent;
   } */
   @media (max-width: 820px) {
-    width: 100%;
+    width: 200px;
  }
+
+ @media (max-width: 380px) {
+  max-width: 380px;
+  width: 100vw;
+  padding: 0 20px;
+  }
 `;
 
 export const ProductItemPrice = styled.p`
