@@ -5,7 +5,7 @@ export const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-left: 10px;
+  margin-left: 0.625rem;
 
   img {
     width: 17.875rem;
@@ -17,6 +17,16 @@ export const ProductContainer = styled.div`
     filter: brightness(70%)
 
     }
+  }
+
+  @media (max-width: 820px) {
+   
+    img {
+    width: 200px;
+    height: 200px;
+
+  }
+
   }
 `;
 
@@ -42,6 +52,9 @@ export const ProductItemFavorite = styled.div`
   /* button {
     background-color: transparent;
   } */
+  @media (max-width: 820px) {
+    width: 100%;
+ }
 `;
 
 export const ProductItemPrice = styled.p`

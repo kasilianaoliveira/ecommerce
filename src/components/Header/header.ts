@@ -116,8 +116,7 @@ export const StyledIconItem = styled.div<{ isOpen: boolean }>`
   }
 
   @media (max-width: 650px) {
-
-    width: 50%;
+    width: ${({ isOpen }) => (isOpen ? '50%' : '22px')};
 
   }
 

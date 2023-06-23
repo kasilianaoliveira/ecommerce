@@ -10,8 +10,17 @@ export const ProductFilter = styled.div`
   align-items: center;
   margin: 50px 0;
 
+
+`;
+export const ContentFilter = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+
   input {
-    width: 31.25rem;
+    /* width: 31.25rem; */
     border-radius: 10px;
     padding: 15px;
     background:#e2e2e2;
@@ -22,34 +31,35 @@ export const ProductFilter = styled.div`
       color: #b4b4b4;
     }
   }
-`;
-export const ContentFilter = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-
-
   select {
-    /* padding: 0 10px; */
+
+    padding: 15px;
     display: flex;
     align-items: center;
     outline: 0;
     border-radius: 10px;
 
-
-  
   }
 
+  @media (max-width: 820px) {
+    width: 100%;
+    justify-content: center;
+    align-items: self-start;
+    gap: 1.25rem;
+    flex-direction: column;
+
+    input,select {
+     width: 100%;
+    }
+
+
+  }
 
 `;
 export const ProductContent = styled.div`
   max-width: 1200px;
   width: 100%;
-  /* margin: 0 auto;   */
-  /* height: 100vh; */
 
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
 `;
