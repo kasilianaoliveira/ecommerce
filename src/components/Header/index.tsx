@@ -42,20 +42,20 @@ export const Header = () => {
 
           {/* <Menu> */}
           <HeaderListItems isActiveMobile={isOpen}>
-            <li >
-              <Link to="/produtos/Masculino">Masculino</Link>
+            <li onClick={handleMenuToggle}>
+              <Link to="/produtos/Masculino" >Masculino</Link>
             </li>
-            <li >
-              <Link to="/produtos/Feminino">Feminino</Link>
+            <li onClick={handleMenuToggle}>
+              <Link to="/produtos/Feminino" >Feminino</Link>
+            </li >
+            <li onClick={handleMenuToggle}>
+              <Link to="/produtos/Chapéus" >Chapéus</Link>
             </li>
-            <li >
-              <Link to="/produtos/Chapéus">Chapéus</Link>
-            </li>
-            <li >
-              <Link to="/produtos/Jaquetas">Jaquetas</Link>
-            </li>
-            <li >
-              <Link to="/produtos/Tênis">Tênis</Link>
+            <li onClick={handleMenuToggle}>
+              <Link to="/produtos/Jaquetas" >Jaquetas</Link>
+            </li >
+            <li onClick={handleMenuToggle}>
+              <Link to="/produtos/Tênis" >Tênis</Link>
             </li>
 
           </HeaderListItems>
@@ -102,7 +102,7 @@ export const Header = () => {
 
         <StyledIconItem aria-label="Menu com items" tabIndex={11} isOpen={isOpen}>
 
-          <BiMenu size={40} onClick={handleMenuToggle}  />
+          <BiMenu size={40} onClick={handleMenuToggle} />
         </StyledIconItem>
 
       </HeaderItemsContainer>
