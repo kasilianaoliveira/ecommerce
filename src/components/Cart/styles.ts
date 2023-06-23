@@ -6,7 +6,7 @@ interface CartContainerPros {
 
 export const CartContainer = styled.div<CartContainerPros>`
   position: fixed;
-  z-index: 3;
+  z-index: 6;
   height: 100vh;
   width: 100vw;
   right: 0;
@@ -33,7 +33,7 @@ export const CartContent = styled.div`
   z-index: 200;
   height: 100%;
   min-width: 500px;
-  background-color: white;
+  background-color: #FFF;
   padding: 20px;
   overflow-y: scroll;
   position: absolute;

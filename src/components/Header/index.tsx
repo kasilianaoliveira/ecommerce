@@ -1,17 +1,28 @@
 
 import { signOut } from 'firebase/auth';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { BsHandbag } from 'react-icons/bs';
+import { IoPersonOutline } from 'react-icons/io5'
+import { BiMenu } from 'react-icons/bi';
+
 import { BsHeart } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
 import { auth } from '../config/firestore.config';
-import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem } from './header';
+import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContainer, HeaderTitle, IconItem, NavBar, StyledIconItem } from './header';
 import { CartContext } from '../../context/cartContext';
+import { push as Menu } from 'react-burger-menu'
 
 export const Header = () => {
-  const { toggleCart,products } = useContext(CartContext)
+  const { toggleCart, products } = useContext(CartContext)
   const { isAuthenticated } = useContext(UserContext);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setIsOpen((isOpen) => !isOpen);
+    console.log(isOpen)
+  };
 
   const navigate = useNavigate();
 
@@ -19,7 +30,7 @@ export const Header = () => {
     navigate(`/${link}`)
   }
   const totalQuantity = products.reduce((accumulator, product) =>
-    accumulator + product.quantity , 0);
+    accumulator + product.quantity, 0);
 
   return (
     <HeaderContainer >
@@ -28,37 +39,41 @@ export const Header = () => {
           Dream Store
         </HeaderTitle>
 
-        <HeaderListItems>
-          <li aria-label="Masculino" tabIndex={2}>
-            <Link to='/produtos/Masculino'>Masculino</Link>
-          </li>
-          <li aria-label="Feminino" tabIndex={3}>
-            <Link to='/produtos/Feminino'>Feminino</Link>
+        <NavBar >
 
-          </li>
-          <li aria-label="Tênis" tabIndex={4}>
-            <Link to='/produtos/Tênis'>Tênis</Link>
-          </li>
-          <li aria-label="Chapéus" tabIndex={5}>
-            <Link to='/produtos/Chapéus'>Tênis</Link>
+          {/* <Menu> */}
+          <HeaderListItems isActiveMobile={isOpen}>
+            <li >
+              <Link to="/produtos/Masculino">Masculino</Link>
+            </li>
+            <li >
+              <Link to="/produtos/Feminino">Feminino</Link>
+            </li>
+            <li >
+              <Link to="/produtos/Chapéus">Chapéus</Link>
+            </li>
+            <li >
+              <Link to="/produtos/Jaquetas">Jaquetas</Link>
+            </li>
+            <li >
+              <Link to="/produtos/Tênis">Tênis</Link>
+            </li>
 
-          </li>
-          <li aria-label="Jaquetas" tabIndex={6}>
-            <Link to='/produtos/Jaquetas'>Jaquetas</Link>
-          </li>
+          </HeaderListItems>
 
-        </HeaderListItems>
 
-        <HeaderIconsItems>
+          {/* </Menu> */}
+        </NavBar>
 
+
+
+
+        <HeaderIconsItems isOpen={isOpen}>
 
           {!isAuthenticated &&
             <>
               <IconItem onClick={() => handleRedirectClick('login')} aria-label="Login" tabIndex={7}>
-                <p>Login</p>
-              </IconItem>
-              <IconItem onClick={() => handleRedirectClick('cadastro')} aria-label="Cadastro" tabIndex={8}>
-                <p>Cadastro</p>
+                <IoPersonOutline size={24} />
               </IconItem>
             </>
           }
@@ -76,12 +91,20 @@ export const Header = () => {
             <BsHandbag size={22} onClick={toggleCart} />
             <span>{totalQuantity}</span>
           </IconItem>
+
+
           {/* 
           add nome da pessoa "Olá, fulano"
 
           } */}
 
         </HeaderIconsItems>
+
+
+        <StyledIconItem aria-label="Menu com items" tabIndex={11} isOpen={isOpen}>
+
+          <BiMenu size={40} onClick={handleMenuToggle}  />
+        </StyledIconItem>
 
       </HeaderItemsContainer>
     </HeaderContainer>
