@@ -30,7 +30,7 @@ max-width: 1200px;
   }
 }
 
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     max-width: 380px;
    img {
      width: 100vw;
@@ -51,6 +51,11 @@ export const ProductContent = styled.div`
     font-size: 1rem;
     line-height: 1.25rem;
   }
+
+  @media (max-width: 420px) {
+    max-width: 380px;
+
+  }
 `;
 
 export const ProductItemFavorite = styled.div`
@@ -67,10 +72,10 @@ export const ProductItemFavorite = styled.div`
     width: 200px;
  }
 
- @media (max-width: 380px) {
-  max-width: 380px;
+ @media (max-width: 420px) {
+  max-width: 100%;
   width: 100vw;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   }
 `;
 
