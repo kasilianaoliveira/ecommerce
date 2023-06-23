@@ -31,18 +31,14 @@ export const ContentFilter = styled.div`
 
 
   select {
+    /* padding: 0 10px; */
+    display: flex;
+    align-items: center;
     outline: 0;
     border-radius: 10px;
 
 
-    option{
-    border-radius: 10px;
-
-      
-    :hover {
-      background-color: #ebedef;
-    }
-   }
+  
   }
 
 

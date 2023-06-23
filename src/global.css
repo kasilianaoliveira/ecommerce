@@ -74,3 +74,8 @@ img {
   max-width: 100%;
   display: block;
 }
+
+option:hover{
+  background: green;
+  color: white;
+}
