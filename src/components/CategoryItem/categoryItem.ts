@@ -25,6 +25,14 @@ export const CategoryItemContent = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  
+  @media (max-width: 820px) {
+    justify-content: center;
+    flex: 1;
+    /* max-width: 300px; */
+    /* flex-direction: column; */
+    /* flex-wrap: nowrap; */
+  }
 `;
 
 

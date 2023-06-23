@@ -24,6 +24,7 @@ export const HeaderItemsContainer = styled.div`
 export const HeaderTitle = styled.h2`
   font-weight: bold;
   font-size: 1.5rem;
+  margin-right: .3125rem;
 
   :hover {
     cursor: pointer;
@@ -86,6 +87,9 @@ export const HeaderIconsItems = styled.div<{ isOpen: boolean }>`
     margin-right: 120px;
   }
 
+  @media (max-width: 420px) {
+    margin-right: 5rem;
+  }
   
 `;
 
@@ -116,8 +120,18 @@ export const StyledIconItem = styled.div<{ isOpen: boolean }>`
   }
 
   @media (max-width: 650px) {
-    width: ${({ isOpen }) => (isOpen ? '50%' : '22px')};
+    width: ${({ isOpen }) => (isOpen ? '50%' : '50px')};
 
+    svg {
+      margin-right: 20px;
+    }
+  }
+
+  @media (max-width: 420px) {
+
+   svg {
+      margin-top: 18px;
+    }
   }
 
 `;

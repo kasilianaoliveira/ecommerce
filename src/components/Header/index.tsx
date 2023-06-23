@@ -92,6 +92,11 @@ export const Header = () => {
           </IconItem>
 
 
+          <StyledIconItem aria-label="Menu com items" tabIndex={11} isOpen={isOpen}>
+
+            <BiMenu size={40} onClick={handleMenuToggle} />
+          </StyledIconItem>
+
           {/* 
           add nome da pessoa "Olá, fulano"
 
@@ -100,10 +105,7 @@ export const Header = () => {
         </HeaderIconsItems>
 
 
-        <StyledIconItem aria-label="Menu com items" tabIndex={11} isOpen={isOpen}>
 
-          <BiMenu size={40} onClick={handleMenuToggle} />
-        </StyledIconItem>
 
       </HeaderItemsContainer>
     </HeaderContainer>

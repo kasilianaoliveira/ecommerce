@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const ProductContainer = styled.div`
-max-width: 1200px;
   margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -23,23 +22,20 @@ max-width: 1200px;
 
   @media (max-width: 820px) {
 
+    flex: 1;
+    max-width: 350px;
 
     padding: 0 20px;
     img {
-    width: 200px;
-    height: 200px;
+    width: 100%;
 
   }
 }
 
   @media (max-width: 420px) {
-    margin-left: 0;
     max-width: 380px;
-   img {
-     width: 100vw;
-   /* height: 200px; */
+    margin-left: 0;
 
-    }
 
   }
 `;
