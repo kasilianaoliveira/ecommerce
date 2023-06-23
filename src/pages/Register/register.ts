@@ -50,13 +50,18 @@ export const RegisterSubtitle = styled.p`
 
 export const RegisterContentForm = styled.div`
   width: 50%;
-  /* max-height: 600px; */
   display: flex; 
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
    gap: 5px;
+
+
+   @media (max-width: 650px) {
+      width: 100%;
+      padding: 0 20px;
+   }
 
 `;
 

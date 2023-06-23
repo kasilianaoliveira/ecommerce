@@ -6,5 +6,10 @@ export const ImageContent = styled.img`
     max-height: 750px;
     border-radius: 20px;
     object-fit: cover;
+
+
+    @media (max-width: 650px) {
+    display: none;
+  }
   
 `;

@@ -57,6 +57,11 @@ export const LoginContentForm = styled.div`
 
    gap: 10px;
 
+   @media (max-width: 650px) {
+      width: 100%;
+      padding: 0 20px;
+   }
+
 `;
 
 export const LoginInputContainer = styled.div`
