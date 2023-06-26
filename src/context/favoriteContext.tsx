@@ -30,7 +30,6 @@ export const FavoritesContextProvider: FC<FavoritesProviderProps> = ({
       auth.onAuthStateChanged(async (user) => {
         if (user) {
           const userId = user.uid;
-          console.log("USER2" + userId);
           const favoritesFromFirestore: Favorites[] = [];
 
           const querySnapshot = await getDocs(

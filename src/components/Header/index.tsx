@@ -1,6 +1,6 @@
 
 import { signOut } from 'firebase/auth';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { BsHandbag } from 'react-icons/bs';
 import { IoPersonOutline } from 'react-icons/io5'
 import { BiMenu } from 'react-icons/bi';
@@ -13,14 +13,19 @@ import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContaine
 import { CartContext } from '../../context/cartContext';
 
 export const Header = () => {
-  const { toggleCart, productCount} = useContext(CartContext)
+  const { toggleCart, products} = useContext(CartContext)
   const { isAuthenticated } = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const productCount = useMemo(() => {
+    return products.reduce((accumulator, product) =>
+      accumulator + product.quantity, 0)
+  }, [products]);
+
+
   const handleMenuToggle = () => {
     setIsOpen((isOpen) => !isOpen);
-    console.log(isOpen)
   };
 
   const navigate = useNavigate();

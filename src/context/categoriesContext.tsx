@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import { createContext, FC, ReactNode,  useState } from 'react';
 import { getDocs, collection } from "firebase/firestore";
 import { db } from '../components/config/firestore.config';
 
@@ -17,7 +17,6 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
   children,
 }: ProductProviderProps) => {
 
-  //logica do produtos
   const [categories, setCategories] = useState<Category[]>([])
   const [profile, setProfile] = useState<string>('')
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
@@ -43,13 +42,6 @@ export const CategoriesContextProvider: FC<ProductProviderProps> = ({
       setIsLoadingCategories(false)
     }
   }
-
-
-
-  useEffect(() => {
-    fetchCategories()
-  }, [])
-
 
 
   return (

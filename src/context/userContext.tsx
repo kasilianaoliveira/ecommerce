@@ -16,8 +16,9 @@ export const UserContextProvider: FC<UserProviderProps> = ({
 }: UserProviderProps) => {
 
   const [currentUser, setCurrentUser] = useState<User | null >(null)
-  // const { setProductFavorite } = useContext(CategoriesContext);
 
+  const isAuthenticated = currentUser !== null;
+  
   const loginUser = (user: User) => {
     setCurrentUser(user);
   }
@@ -25,14 +26,6 @@ export const UserContextProvider: FC<UserProviderProps> = ({
     setCurrentUser(null);
   }
 
- const isAuthenticated = currentUser !== null;
-
-//  useEffect(() => {
-    
-//   if (!isAuthenticated) {
-//     setProductFavorite([]);
-//   }
-// }, [isAuthenticated, setProductFavorite])
 
   return (
     <UserContext.Provider

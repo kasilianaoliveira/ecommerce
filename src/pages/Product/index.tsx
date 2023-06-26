@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { Header } from '../../components/Header'
 import { ProductCategory } from '../../components/ProductCategory'
 import { CategoriesContext } from '../../context/categoriesContext';
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { ContentFilter, ProductContainer, ProductContent, ProductFilter } from './product';
 
 export const Product = () => {
-  const { categories, fetchCategories, isLoadingCategories } = useContext(CategoriesContext);
+  const { categories,isLoadingCategories } = useContext(CategoriesContext);
   const [searchTerm, setSearchTerm] = useState('');
 
   const [selectedOption, setSelectedOption] = useState('');
@@ -23,11 +23,7 @@ export const Product = () => {
 
   const { nameProduct } = useParams();
 
-  console.log(selectedOption)
-  useEffect(() => {
-    fetchCategories()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+
 
   const options = [
     { value: '', label: 'Todos os preços' },

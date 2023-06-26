@@ -8,15 +8,13 @@ import { Loading } from '../Loading';
 
 export const Categories = () => {
 
-  const { categories,fetchCategories, isLoadingCategories } = useContext(CategoriesContext);
+  const { categories, fetchCategories, isLoadingCategories } = useContext(CategoriesContext);
 
-  // const memoizedFetchCategories = useCallback(() => {
-  //   fetchCategories();
-  // }, [fetchCategories]);
+  useEffect(() => {
+    fetchCategories()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  // useEffect(() => {
-  //   memoizedFetchCategories();
-  // }, [memoizedFetchCategories]);
 
   return (
     <CategoriesContainer>

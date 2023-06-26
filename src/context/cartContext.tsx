@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { CartContextData } from './ContextTypes';
 import { Cart } from '../types/Cart';
 import { Product } from '../types/Product';
@@ -16,18 +16,34 @@ export const CartContextProvider: FC<CartProviderProps> = ({
 }: CartProviderProps) => {
 
   const [isVisible, setIsVisible] = useState(false);
-  const [products, setProducts] = useState<Cart[]>([]);
+  const [products, setProducts] = useState<Cart[]>(() => {
+    const productsFromLocalStorage = JSON.parse(localStorage.getItem('cartProducts')!);
+    return productsFromLocalStorage || [];
+  });
+
+  useEffect(() => {
+    const productsFromLocalStorage = JSON.parse(
+      localStorage.getItem('cartProducts')!
+    )
+
+    setProducts(productsFromLocalStorage)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('cartProducts', JSON.stringify(products))
+  }, [products])
 
   const productsTotalPrice = useMemo(() => {
-    return products.reduce((accumulator, product) =>
-      accumulator + (product.price * product.quantity), 0);
-
-  }, [products]);
+    return products.reduce((acc, currentProduct) => {
+      return acc + currentProduct.price * currentProduct.quantity
+    }, 0)
+  }, [products])
 
   const productCount = useMemo(() => {
-    return products.reduce((accumulator, product) =>
-      accumulator + product.quantity, 0)
-  }, [products]);
+    return products.reduce((acc, currentProduct) => {
+      return acc + currentProduct.quantity
+    }, 0)
+  }, [products])
 
 
   const toggleCart = () => {
@@ -71,9 +87,7 @@ export const CartContextProvider: FC<CartProviderProps> = ({
     );
   };
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+
   return (
     <CartContext.Provider
       value={{

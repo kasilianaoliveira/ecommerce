@@ -7,7 +7,7 @@ import {
   CartItemQuantity,
   RemoveButton
 } from './styles'
-import { useContext, useEffect } from 'react';
+import { useContext} from 'react';
 import { CartContext } from '../../context/cartContext';
 
 
