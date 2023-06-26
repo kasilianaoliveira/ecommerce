@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { CartContextData } from './ContextTypes';
 import { Cart } from '../types/Cart';
 import { Product } from '../types/Product';
@@ -17,6 +17,13 @@ export const CartContextProvider: FC<CartProviderProps> = ({
 
   const [isVisible, setIsVisible] = useState(false);
   const [products, setProducts] = useState<Cart[]>([]);
+
+  const productsTotalPrice = useMemo(() => {
+    return products.reduce((accumulator, product) =>
+      accumulator + (product.price * product.quantity), 0);
+
+  }, [products])
+
 
   const toggleCart = () => {
     setIsVisible((prevState) => !prevState);
@@ -67,6 +74,7 @@ export const CartContextProvider: FC<CartProviderProps> = ({
       value={{
         isVisible,
         products,
+        productsTotalPrice,
         toggleCart,
         addProductToCart,
         removeProductFromCart,

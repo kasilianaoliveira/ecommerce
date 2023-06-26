@@ -29,7 +29,7 @@ export interface UserContextData {
 export interface CartContextData {
   isVisible: boolean;
   products: Cart[];
-
+  productsTotalPrice: number;
   toggleCart: () => void;
   removeProductFromCart: (productId: string) => void;
   addProductToCart: (product: Product) => void;

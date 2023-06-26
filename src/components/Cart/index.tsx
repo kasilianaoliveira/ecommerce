@@ -13,14 +13,10 @@ import { BsCartCheck } from 'react-icons/bs'
 import { CartItem } from '../CartItem'
 
 export const Cart = () => {
-  const { isVisible, toggleCart, products } = useContext(CartContext)
-
-  const totalValueCart = products.reduce((accumulator, product) =>
-    accumulator + (product.price * product.quantity), 0);
+  const { isVisible, toggleCart, products, productsTotalPrice } = useContext(CartContext)
 
 
-
-  const filterPrice = totalValueCart.toLocaleString("pt-br", {
+  const filterPrice = productsTotalPrice.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
