@@ -29,6 +29,7 @@ export interface UserContextData {
 export interface CartContextData {
   isVisible: boolean;
   products: Cart[];
+  productCount: number;
   productsTotalPrice: number;
   toggleCart: () => void;
   removeProductFromCart: (productId: string) => void;

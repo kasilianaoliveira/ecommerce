@@ -22,7 +22,12 @@ export const CartContextProvider: FC<CartProviderProps> = ({
     return products.reduce((accumulator, product) =>
       accumulator + (product.price * product.quantity), 0);
 
-  }, [products])
+  }, [products]);
+
+  const productCount = useMemo(() => {
+    return products.reduce((accumulator, product) =>
+      accumulator + product.quantity, 0)
+  }, [products]);
 
 
   const toggleCart = () => {
@@ -74,6 +79,7 @@ export const CartContextProvider: FC<CartProviderProps> = ({
       value={{
         isVisible,
         products,
+        productCount,
         productsTotalPrice,
         toggleCart,
         addProductToCart,

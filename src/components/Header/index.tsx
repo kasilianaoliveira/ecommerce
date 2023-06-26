@@ -13,7 +13,7 @@ import { HeaderContainer, HeaderIconsItems, HeaderListItems, HeaderItemsContaine
 import { CartContext } from '../../context/cartContext';
 
 export const Header = () => {
-  const { toggleCart, products } = useContext(CartContext)
+  const { toggleCart, productCount} = useContext(CartContext)
   const { isAuthenticated } = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +28,7 @@ export const Header = () => {
   const handleRedirectClick = (link?: string) => {
     navigate(`/${link}`)
   }
-  const totalQuantity = products.reduce((accumulator, product) =>
-    accumulator + product.quantity, 0);
+
 
   return (
     <HeaderContainer >
@@ -88,7 +87,7 @@ export const Header = () => {
 
           <IconItem aria-label="Carrinho de compras" tabIndex={11}>
             <BsHandbag size={22} onClick={toggleCart} />
-            <span>{totalQuantity}</span>
+            <span>{productCount}</span>
           </IconItem>
 
 
