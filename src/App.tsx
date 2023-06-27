@@ -14,6 +14,7 @@ import { userConverter } from "./converters/firestore.converters";
 import { Loading } from "./components/Loading";
 import { Product } from "./pages/Product";
 import { Cart } from "./components/Cart";
+import { Checkout } from "./pages/Checkout";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/cadastro" element={<Register />} />
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/produtos/:nameProduct" element={<Product />} />
+          <Route path="/checkout" element={<Checkout />} />
 
         </Routes>
         <Cart/>

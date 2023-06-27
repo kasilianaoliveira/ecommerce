@@ -26,7 +26,7 @@ export const CartItem = ({ product }: CartItemProps) => {
 
       <CartItemInfo>
         <p>{product.name}</p>
-        <p>R${product.price}</p>
+        <p>R${product.price},00</p>
 
         <CartItemQuantity>
           <AiOutlineMinus size={18} onClick={() => decreaseProductQuantity(product.id)}/>

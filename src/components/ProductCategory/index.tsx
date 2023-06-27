@@ -37,7 +37,7 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
 
   const { addFavorite, removeFavorite, productFavorite } = useContext(FavoritesContext);
   const { isAuthenticated } = useContext(UserContext);
-  const { addProductToCart } = useContext(CartContext);
+  const { addProductToCart, toggleCart } = useContext(CartContext);
 
 
   const isFavorite = (product: Product): boolean => {
@@ -48,7 +48,10 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
 
   const handleAddToCartClick = (product: Product) => {
     addProductToCart(product);
+    // toggleCart();
   }
+
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <ProductContainer>

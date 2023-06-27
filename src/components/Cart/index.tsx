@@ -11,16 +11,22 @@ import {
 import { CustomButton } from '../CustomButton'
 import { BsCartCheck } from 'react-icons/bs'
 import { CartItem } from '../CartItem'
+import { useNavigate } from 'react-router-dom'
 
 export const Cart = () => {
   const { isVisible, toggleCart, products, productsTotalPrice, productCount } = useContext(CartContext)
 
+  const navigate = useNavigate()
 
   const filterPrice = productsTotalPrice.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
 
+  const handleClickFromCheckout = () => {
+    navigate('/checkout');
+    toggleCart();
+  }
   return (
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart} />
@@ -36,7 +42,7 @@ export const Cart = () => {
         {productCount > 0 && (
             <>
               <CartTotal>Total: {filterPrice}</CartTotal>
-              <CustomButton startIcon={<BsCartCheck />}>
+              <CustomButton startIcon={<BsCartCheck />} onClick={handleClickFromCheckout} >
                 Ir para o Checkout
               </CustomButton>
             </>
