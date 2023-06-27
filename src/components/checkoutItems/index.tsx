@@ -1,15 +1,15 @@
 
 import { useContext } from 'react'
+import { CartContext } from '../../context/cartContext'
+import { CartItem } from '../CartItem'
+import { CustomButton } from '../CustomButton'
+import { BsBagCheck } from 'react-icons/bs'
 import {
   CheckoutContainer,
   CheckoutTitle,
   CheckoutProducts,
   CheckoutTotal
 } from './checkoutItem'
-import { CartContext } from '../../context/cartContext'
-import { CartItem } from '../CartItem'
-import { BsBagCheck } from 'react-icons/bs'
-import { CustomButton } from '../CustomButton'
 
 export const CheckoutItems = () => {
   const { products, productsTotalPrice } = useContext(CartContext)

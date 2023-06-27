@@ -15,6 +15,7 @@ import { Loading } from "./components/Loading";
 import { Product } from "./pages/Product";
 import { Cart } from "./components/Cart";
 import { Checkout } from "./pages/Checkout";
+import AuthenticationGuard from "./guards/authentication.guard";
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
           <Route path="/cadastro" element={<Register />} />
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/produtos/:nameProduct" element={<Product />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<AuthenticationGuard><Checkout /></AuthenticationGuard>} />
 
         </Routes>
         <Cart/>
