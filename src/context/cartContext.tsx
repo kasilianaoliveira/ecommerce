@@ -88,6 +88,11 @@ export const CartContextProvider: FC<CartProviderProps> = ({
   };
 
 
+  const clearProducts = () => {
+    setProducts([])
+  }
+
+
   return (
     <CartContext.Provider
       value={{
@@ -96,6 +101,7 @@ export const CartContextProvider: FC<CartProviderProps> = ({
         productCount,
         productsTotalPrice,
         toggleCart,
+        clearProducts,
         addProductToCart,
         removeProductFromCart,
         decreaseProductQuantity

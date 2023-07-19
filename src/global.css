@@ -11,6 +11,8 @@
   --input: #F1F1F1;
   --placeholder: #6c757d;
   --error: #FF6A6A;
+
+  --success: #198754;
 }
 
 * {

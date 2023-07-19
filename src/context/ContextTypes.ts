@@ -32,6 +32,7 @@ export interface CartContextData {
   productCount: number;
   productsTotalPrice: number;
   toggleCart: () => void;
+  clearProducts: () => void;
   removeProductFromCart: (productId: string) => void;
   addProductToCart: (product: Product) => void;
   decreaseProductQuantity: (productId: string) => void
