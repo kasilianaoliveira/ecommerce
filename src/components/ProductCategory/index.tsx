@@ -79,7 +79,7 @@ export const ProductCategory: FC<productProps> = ({ product }) => {
               :
               <Button onClick={onOpen} aria-label='Modal'><BsHeart size={18} /></Button>
             }
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered >
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader style={{ color: "#222121" }}>Desejar favoritar esse item?</ModalHeader>
