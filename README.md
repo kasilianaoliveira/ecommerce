@@ -8,6 +8,8 @@
 
 A ideia dessa aplicação é termos um site onde podemos visualizar e comprar roupas, acessorios ou tênis. Nesse site vamos poder fazer login com email/senha ou com google, além disso podemos navegar entre as categorias expostas, favoritar o produto que mais lhe agrada, adicionar ao carrinho e simular sua compra utilizando o stripe. Nesse site estamos usando react para sua construção, react hook form para formulários, yup para validações e o firebase para armazenamento dos dados, utilizando os serviços de autenticação e firestore para banco de dados.
 
+O backend com conexão com API do stripe está hospedado no Render (que tem algumas limitações em uso)
+
 ### Tecnologias Usadas
 
 - [React](https://reactjs.org/)
@@ -20,6 +22,7 @@ A ideia dessa aplicação é termos um site onde podemos visualizar e comprar ro
 - [Axios](https://axios-http.com/ptbr/docs/api_intro)
 - [Yup](https://www.npmjs.com/package/yup)
 - [API do stripe](https://stripe.com/docs/checkout/quickstart)
+
 
 ### Como rodar a aplicação
 
